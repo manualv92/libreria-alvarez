@@ -1,0 +1,9 @@
+.provider-edit-product-list {
+    min-height: 100px;
+    border: solid;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-radius: 5px;
+    max-height: 100px;
+    overflow-y: scroll;
+}

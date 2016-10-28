@@ -1,0 +1,106 @@
+<div>
+    <h3>Crear una compra</h3>
+</div>
+<form class="form-horizontal">
+    <div class="col-md-12">
+        <label class="col-md-12">Datos del Proveedor</label>
+        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
+        <div class="col-md-8">
+            <table class="table table-bordered" ng-show="bcc.buyData.proveedor.nombre.length > 0">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{bcc.buyData.proveedor.nombre}}</td>
+                    <td>{{bcc.buyData.proveedor.telefono}}</td>
+                    <td>{{bcc.buyData.proveedor.email}}</td>
+                    <td><button class="btn btn-danger btn-xs" ng-click="bcc.removeProvider( )">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--ul class="provider-edit-product-list">
+                <li ng-show="bcc.buyData.proveedor.nombre.length > 0">
+                    Nombre: {{bcc.buyData.proveedor.nombre}}, Email: {{bcc.buyData.proveedor.email}}
+                    <button class="btn btn-danger btn-xs" ng-click="bcc.removeProvider( )">X</button>
+                </li>
+            </ul-->
+        </div>
+        <div class="col-md-4">
+            <label class="control-label">Proveedores</label>
+            <input type="text" ng-model="bcc.textoBuscadorProveedor">
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="proveedorAux in bcc.proveedoresAux | filter:bcc.textoBuscadorProveedor">
+                    Nombre: {{proveedorAux.nombre}}, Email: {{proveedorAux.email}}
+                    <button class="btn btn-success btn-xs" ng-click="bcc.addProvider(proveedorAux)">+</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label class="col-md-12">Detalle de Compra</label>
+        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
+        <div class="col-md-8">
+            <!--ul class="provider-edit-product-list">
+                <li ng-repeat="producto in bcc.buyData.productos">
+                    Nombre: {{producto.nombre}}, Precio: $
+                    <input type="number" min="0" step="any" ng-model="producto.precio" ng-required="!producto.precio">
+                    , Precio Venta: $ <input type="number" min="0" step="any" ng-model="producto.precioVenta" ng-required="!producto.precioVenta">, Cantidad:
+                    <input type="number" min="0" ng-change="bcc.carcularTotal()" ng-model="producto.cantidad" ng-required="!producto.cantidad">
+                    <button class="btn btn-danger btn-xs" ng-click="bcc.removeProduct(producto)">X</button>
+                </li>
+            </ul-->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th class="venta-table-cantidad">Cantidad</th>
+                    <th>Nombre</th>
+                    <th class="venta-table-precio-venta">Precio</th>
+                    <th class="venta-table-precio-venta">Precio Venta</th>
+                    <th class="venta-table-cantidad">Importe</th>
+                    <th class="venta-table-accion">Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="producto in bcc.buyData.productos">
+                    <td><input class="venta-table-input" type="number" min="0" ng-change="bcc.calcularTotal()" ng-model="producto.cantidad" ng-required="!producto.cantidad"></td>
+                    <td>{{producto.nombre}}</td>
+                    <td>$ <input class="venta-table-precio-input" type="number" min="0" step="any" ng-model="producto.precio" ng-required="!producto.precio"></td>
+                    <td>$ <input class="venta-table-precio-input" type="number" min="0" step="any" ng-model="producto.precioVenta" ng-required="!producto.precioVenta"></td>
+                    <td>{{bcc.math.round(100*(producto.cantidad*producto.precio))/100}}</td>
+                    <td><button class="btn btn-danger btn-xs" ng-click="bcc.removeProduct(producto)">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="text-right venta-total">Total: {{bcc.buyData.total}}</p>
+        </div>
+        <div class="col-md-4">
+            <label class="control-label">Disponibles</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="productoAux in bcc.productosAux">
+                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precio}}
+                    <button class="btn btn-success btn-xs" ng-click="bcc.addProduct(productoAux)">+</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-7">
+            <button type="button" ng-click="bcc.createBuy()" class="btn btn-success">Crear Compra</button>
+            <a ng-click="bcc.goBack()" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="bcc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ bcc.message }}
+        </div>
+    </div>
+</div>

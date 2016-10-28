@@ -1,0 +1,61 @@
+<div>
+    <h3>Crear un cliente</h3>
+</div>
+<form class="form-horizontal" ng-submit="ccc.createClient()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="ccc.clientData.nombre" ng-required="!ccc.clientData.nombre">
+        </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-readonly="ccc.clientData.tipoPersona.id==2" ng-model="ccc.clientData.apellido" ng-required="!ccc.clientData.apellido">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Domicilio</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="ccc.clientData.domicilio" ng-required="!ccc.clientData.domicilio">
+        </div>
+        <label class="col-md-1">Email</label>
+        <div class="col-md-3">
+            <input type="email" class="form-control" ng-model="ccc.clientData.email" ng-required="!ccc.clientData.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-change="ccc.cleanCuitNumber()" ng-model="ccc.clientData.tipoPersona" ng-options="tipoP as tipoP.descripcion for tipoP in ccc.clientData.tipoPersonaList" ng-required="!ccc.clientData.tipoPersona">
+            </select>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-blur="ccc.esCUITValida(ccc.clientData.nroCuit)" ng-model="ccc.clientData.nroCuit" ng-required="!ccc.clientData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-readonly="ccc.clientData.tipoPersona.id==2" ng-model="ccc.clientData.tipoDocumento" ng-options="tipoD as tipoD.descripcion for tipoD in ccc.clientData.tipoDocumentoList" ng-required="!ccc.clientData.tipoDocumento">
+            </select>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-readonly="ccc.clientData.tipoPersona.id==2" ng-model="ccc.clientData.nroDocumento" ng-required="!ccc.clientData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Crear Cliente</button>
+            <a ng-click="ccc.goBack()" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="ccc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ ccc.message }}
+        </div>
+    </div>
+</div>

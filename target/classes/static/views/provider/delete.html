@@ -1,0 +1,92 @@
+<div>
+    <h3>Borrar un Proveedor</h3>
+</div>
+<form class="form-horizontal" ng-submit="pdc.updateProvider()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre del proveedor</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pdc.providerName" ng-required="!pdc.providerName">
+        </div>
+        <button type="button" ng-click="pdc.searchProveedoresByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="pdc.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ pdc.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.searchedProviders.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="provider in pdc.searchedProviders">
+                    <th scope="row">{{pdc.searchedProviders.indexOf(provider)}}</th>
+                    <td>{{provider.nombre}}</td>
+                    <td>{{provider.telefono}}</td>
+                    <td>{{provider.email}}</td>
+                    <td><button ng-click="pdc.selectProviderForUpdate(provider)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group" ng-show="pdc.providerSelected">
+            <label class="col-md-4 control-label">Nombre</label>
+            <div class="col-md-7">
+                <input type="text" readonly class="form-control" ng-model="pdc.providerData.nombre" ng-required="!pdc.providerData.nombre">
+            </div>
+        </div>
+        <div class="form-group" ng-show="pdc.providerSelected">
+            <label class="col-md-4 control-label">Email</label>
+            <div class="col-md-7">
+                <input ttype="number" readonly min="0" class="form-control" ng-model="pdc.providerData.email" ng-required="!pdc.providerData.email">
+            </div>
+        </div>
+        <div class="form-group" ng-show="pdc.providerSelected">
+            <label class="col-md-4 control-label">Teléfono</label>
+            <div class="col-md-7">
+                <input type="number" readonly step="any" class="form-control"  ng-model="pdc.providerData.telefono" ng-required="!pdc.providerData.telefono">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7" ng-show="pdc.providerSelected">
+        <label class="col-md-12">Productos</label>
+        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
+        <div class="col-md-6">
+            <label class="control-label">Seleccionados</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="producto in pdc.providerData.productos">
+                    Nombre: {{producto.nombre}}, Precio: ${{producto.precio}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-block">Borrar Proveedor</button>
+            <a ng-click="pdc.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pdc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pdc.message }}
+        </div>
+    </div>
+</div>

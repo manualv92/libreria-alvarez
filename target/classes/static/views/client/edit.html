@@ -1,0 +1,99 @@
+<div>
+    <h3>Editar un cliente</h3>
+</div>
+<form class="form-horizontal" ng-submit="cec.updateClient()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Ingrese nombre del Cliente</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="cec.clientName" ng-required="!cec.clientName">
+        </div>
+        <button type="button" ng-click="cec.searchClientesByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="cec.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ cec.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.searchedClients.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="client in cec.searchedClients">
+                    <th scope="row">{{cec.searchedClients.indexOf(client)}}</th>
+                    <td>{{client.nombre}}</td>
+                    <td>{{client.apellido}}</td>
+                    <td>{{client.email}}</td>
+                    <td><button ng-click="cec.selectClientForUpdate(client)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.clientSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="cec.clientData.nombre" ng-required="!cec.clientData.nombre">
+        </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-readonly="cec.clientData.tipoPersona.id==2" ng-model="cec.clientData.apellido" ng-required="!cec.clientData.apellido">
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.clientSelected">
+        <label class="col-md-2 control-label">Domicilio</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="cec.clientData.domicilio" ng-required="!cec.clientData.domicilio">
+        </div>
+        <label class="col-md-1">Email</label>
+        <div class="col-md-3">
+            <input type="email" class="form-control" ng-model="cec.clientData.email" ng-required="!cec.clientData.email">
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.clientSelected">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="cec.clientData.tipoPersona.descripcion" ng-required="!cec.clientData.tipoPersona.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" min="0" ng-blur="cec.esCUITValida(cec.clientData.nroCuit)" class="form-control" ng-model="cec.clientData.nroCuit" ng-required="!cec.clientData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.clientSelected">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="cec.clientData.tipoDocumento.descripcion" ng-required="!cec.clientData.tipoDocumento.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-readonly="cec.clientData.tipoPersona.id==2" ng-model="cec.clientData.nroDocumento" ng-required="!cec.clientData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group" ng-show="cec.clientSelected">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Editar Cliente</button>
+            <a ng-click="cec.goBack()" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="cec.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ cec.message }}
+        </div>
+    </div>
+</div>

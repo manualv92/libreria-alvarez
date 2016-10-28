@@ -1,0 +1,99 @@
+<div>
+    <h3>Editar un Proveedor</h3>
+</div>
+<form class="form-horizontal" ng-submit="pec.updateProvider()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre del proveedor</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.providerName" ng-required="!pec.providerName">
+        </div>
+        <button type="button" ng-click="pec.searchProveedoresByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="pec.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ pec.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.searchedProviders.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="provider in pec.searchedProviders">
+                    <th scope="row">{{pec.searchedProviders.indexOf(provider)}}</th>
+                    <td>{{provider.nombre}}</td>
+                    <td>{{provider.telefono}}</td>
+                    <td>{{provider.email}}</td>
+                    <td><button ng-click="pec.selectProviderForUpdate(provider)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group" ng-show="pec.providerSelected">
+            <label class="col-md-4 control-label">Nombre</label>
+            <div class="col-md-7">
+                <input type="text" class="form-control" ng-model="pec.providerData.nombre" ng-required="!pec.providerData.nombre">
+            </div>
+        </div>
+        <div class="form-group" ng-show="pec.providerSelected">
+            <label class="col-md-4 control-label">Email</label>
+            <div class="col-md-7">
+                <input ttype="number" min="0" class="form-control" ng-model="pec.providerData.email" ng-required="!pec.providerData.email">
+            </div>
+        </div>
+        <div class="form-group" ng-show="pec.providerSelected">
+            <label class="col-md-4 control-label">Teléfono</label>
+            <div class="col-md-7">
+                <input type="number" step="any" class="form-control"  ng-model="pec.providerData.telefono" ng-required="!pec.providerData.telefono">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7" ng-show="pec.providerSelected">
+        <label class="col-md-12">Productos</label>
+        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
+        <div class="col-md-6">
+            <label class="control-label">Seleccionados</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="producto in pec.providerData.productos">
+                    Nombre: {{producto.nombre}}, Precio: ${{producto.precio}}
+                    <button class="btn btn-danger btn-xs" ng-click="pec.removeProduct(producto)">X</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Disponibles</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="productoAux in pec.productosAux">
+                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precio}}
+                    <button class="btn btn-success btn-xs" ng-click="pec.addProduct(productoAux)">+</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.providerSelected">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-block">Editar Proveedor</button>
+            <a ng-click="pec.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pec.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pec.message }}
+        </div>
+    </div>
+</div>

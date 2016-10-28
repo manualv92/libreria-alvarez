@@ -1,0 +1,19 @@
+.venta-table-input {
+    width: 40px;
+}
+.venta-table-cantidad {
+    width: 80px;
+}
+.venta-table-precio-input {
+    width: 80px;
+}
+.venta-table-accion {
+    width: 60px;
+}
+.venta-total {
+    font-weight: 600;
+    padding-right: 110px;
+}
+.venta-table-precio-venta {
+    width:110px;
+}

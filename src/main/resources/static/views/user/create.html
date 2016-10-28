@@ -1,0 +1,67 @@
+<div>
+    <h3>Crear un usuario</h3>
+</div>
+<form class="form-horizontal" ng-submit="ucc.createUser()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="ucc.userData.nombre" ng-required="!ucc.userData.nombre">
+        </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control"  ng-model="ucc.userData.apellido" ng-required="!ucc.userData.apellido">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Domicilio</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="ucc.userData.domicilio" ng-required="!ucc.userData.domicilio">
+        </div>
+        <label class="col-md-1">Email</label>
+        <div class="col-md-3">
+            <input type="email" class="form-control" ng-model="ucc.userData.email" ng-required="!ucc.userData.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Rol de Usuario</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-model="ucc.userData.rol" ng-options="rol as rol.descripcion for rol in ucc.userData.rolList" ng-required="!ucc.userData.rol">
+            </select>
+        </div>
+        <label class="col-md-1">Teléfono</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control"  ng-model="ucc.userData.telefono" ng-required="!ucc.userData.telefono">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-model="ucc.userData.tipoDocumento" ng-options="tipoD as tipoD.descripcion for tipoD in ucc.userData.tipoDocumentoList" ng-required="!ucc.userData.tipoDocumento">
+            </select>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-model="ucc.userData.nroDocumento" ng-required="!ucc.userData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Contraseña</label>
+        <div class="col-md-3">
+            <input type="password" class="form-control" ng-model="ucc.userData.password" ng-required="!ucc.userData.password">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-lg btn-block">Crear Usuario</button>
+            <a ng-click="ucc.goBack()" class="btn btn-danger btn-lg btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="ucc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ ucc.message }}
+        </div>
+    </div>
+</div>

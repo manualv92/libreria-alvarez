@@ -1,0 +1,89 @@
+<div>
+    <h3>Editar un Producto</h3>
+</div>
+<form class="form-horizontal" ng-submit="pec.updateProduct()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre del producto</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.productName" ng-required="!pec.productName">
+        </div>
+        <button type="button" ng-click="pec.searchProductosByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="pec.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ pec.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.searchedProducts.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="product in pec.searchedProducts">
+                    <th scope="row">{{pec.searchedProducts.indexOf(product)}}</th>
+                    <td>{{product.nombre}}</td>
+                    <td>{{product.precio}}</td>
+                    <td>{{product.stock}}</td>
+                    <td><button ng-click="pec.selectProductForUpdate(product)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.productSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.productData.nombre" ng-required="!pec.productData.nombre">
+        </div>
+        <label class="col-md-1">Precio</label>
+        <div class="col-md-3">
+            <input type="number" step="any" class="form-control"  ng-model="pec.productData.precio" ng-required="!pec.productData.precio">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.productSelected">
+        <label class="col-md-2 control-label">Stock</label>
+        <div class="col-md-3">
+            <input ttype="number" min="0" class="form-control" ng-model="pec.productData.stock" ng-required="!pec.productData.stock">
+        </div>
+        <label class="col-md-1">Tipo Producto</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pec.productData.tipoProducto.descripcion" ng-required="!pec.productData.tipoProducto.descripcion">
+            </input>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.productSelected">
+        <label class="col-md-2 control-label">Marca</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.productData.marca" ng-required="!pec.productData.marca">
+        </div>
+        <label class="col-md-1">Precio de Venta</label>
+        <div class="col-md-3">
+            <input type="number" step="any" class="form-control" ng-model="pec.productData.precioVenta" ng-required="!pec.productData.precioVenta">
+            </input>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.productSelected">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-block">Editar Producto</button>
+            <a ng-click="pec.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pec.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pec.message }}
+        </div>
+    </div>
+</div>

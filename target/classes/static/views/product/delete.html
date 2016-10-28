@@ -1,0 +1,89 @@
+<div>
+    <h3>Borrar un Producto</h3>
+</div>
+<form class="form-horizontal" ng-submit="pdc.deleteProduct()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre del producto</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pdc.productName" ng-required="!pdc.productName">
+        </div>
+        <button type="button" ng-click="pdc.searchProductosByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="pdc.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ pdc.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.searchedProducts.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="product in pdc.searchedProducts">
+                    <th scope="row">{{pdc.searchedProducts.indexOf(product)}}</th>
+                    <td>{{product.nombre}}</td>
+                    <td>{{product.precio}}</td>
+                    <td>{{product.stock}}</td>
+                    <td><button ng-click="pdc.selectProductForDelete(product)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.productSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input readOnly type="text" class="form-control" ng-model="pdc.productData.nombre" ng-required="!pdc.productData.nombre">
+        </div>
+        <label class="col-md-1">Precio</label>
+        <div class="col-md-3">
+            <input readOnly type="number" step="any" class="form-control"  ng-model="pdc.productData.precio" ng-required="!pdc.productData.precio">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.productSelected">
+        <label class="col-md-2 control-label">Stock</label>
+        <div class="col-md-3">
+            <input readOnly type="text" class="form-control" ng-model="pdc.productData.stock" ng-required="!pdc.productData.stock">
+        </div>
+        <label class="col-md-1">Tipo Producto</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pdc.productData.tipoProducto.descripcion" ng-required="!pdc.productData.tipoProducto.descripcion">
+            </input>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.productSelected">
+        <label class="col-md-2 control-label">Marca</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pdc.productData.marca" ng-required="!pdc.productData.marca">
+        </div>
+        <label class="col-md-1">Precio Venta</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pdc.productData.precioVenta" ng-required="!pdc.productData.precioVenta">
+            </input>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.productSelected">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-warning btn-block">Borrar Producto</button>
+            <a ng-click="pdc.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pdc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pdc.message }}
+        </div>
+    </div>
+</div>

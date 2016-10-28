@@ -1,0 +1,26 @@
+<div class="col-md-6 col-md-offset-3">
+    <div class="row page-header">
+        <h1>Login</h1>
+    </div>
+    <div class="jumbotron">
+        <form ng-submit="ulc.logInUser()" name="userForm">
+
+            <!-- Email INPUT -->
+            <div class="form-group">
+                <label>Número de Documento</label>
+                <input type="number" min="0" class="form-control" ng-model="ulc.userData.nroDocumento" ng-required="!ulc.userData.nroDocumento">
+            </div>
+
+            <!-- PASSWORD INPUT -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" ng-model="ulc.userData.password" ng-required="!ulc.userData.password">
+            </div>
+            <!-- LOGIN BUTTON -->
+            <button type="submit" class="btn btn-block btn-primary">Login</button>
+            <div class="alert alert-danger" ng-if="ulc.message">
+                {{ ulc.message }}
+            </div>
+        </form>
+    </div>
+</div>

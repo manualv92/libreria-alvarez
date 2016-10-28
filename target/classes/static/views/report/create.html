@@ -1,0 +1,9 @@
+<button class="btn btn-success" ng-click="rcc.crearReporteVenta()">Crear reporte venta</button>
+<button class="btn btn-success" ng-click="rcc.crearReporteCompra()">Crear reporte compra</button>
+<div class="row show-hide-message" ng-show="rcc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ rcc.message }}
+        </div>
+    </div>
+</div>

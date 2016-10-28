@@ -1,0 +1,50 @@
+<div>
+    <h3>Crear un producto</h3>
+</div>
+<form class="form-horizontal" ng-submit="pcc.createProduct()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.productData.nombre" ng-required="!pcc.productData.nombre">
+        </div>
+        <label class="col-md-1">Precio</label>
+        <div class="col-md-3">
+            <input type="number" min="0" step="any" class="form-control" ng-model="pcc.productData.precio" ng-required="!pcc.productData.precio">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Producto</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-model="pcc.productData.tipoProducto" ng-options="tipoP as tipoP.descripcion for tipoP in pcc.productData.tipoProductoList" ng-required="!pcc.productData.tipoProducto">
+            </select>
+        </div>
+        <label class="col-md-1">Stock</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-model="pcc.productData.stock" ng-required="!pcc.productData.stock">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Marca</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.productData.marca" ng-required="!pcc.productData.marca">
+        </div>
+        <label class="col-md-1">Precio de Venta</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-model="pcc.productData.precioVenta" ng-required="!pcc.productData.precioVenta">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-block">Crear Producto</button>
+            <a ng-click="pcc.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pcc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pcc.message }}
+        </div>
+    </div>
+</div>

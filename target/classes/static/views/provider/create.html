@@ -1,0 +1,61 @@
+<div>
+    <h3>Crear un proveedor</h3>
+</div>
+<form class="form-horizontal" ng-submit="pcc.createProvider()">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="col-md-4 control-label">Nombre</label>
+            <div class="col-md-7">
+                <input type="text" class="form-control" ng-model="pcc.providerData.nombre" ng-required="!pcc.providerData.nombre">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Teléfono</label>
+            <div class="col-md-7">
+                <input type="number" min="0" class="form-control" ng-model="pcc.providerData.telefono" ng-required="!pcc.providerData.telefono">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label">Email</label>
+            <div class="col-md-7">
+                <input type="email" class="form-control" ng-model="pcc.providerData.email" ng-required="!pcc.providerData.email">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <label class="col-md-12">Productos</label>
+        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
+        <div class="col-md-6">
+            <label class="control-label">Seleccionados</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="producto in pcc.providerData.productos">
+                    Nombre: {{producto.nombre}}, Precio: ${{producto.precio}}
+                    <button class="btn btn-danger btn-xs" ng-click="pcc.removeProduct(producto)">X</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <label class="control-label">Disponibles</label>
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="productoAux in pcc.productosAux">
+                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precio}}
+                    <button class="btn btn-success btn-xs" ng-click="pcc.addProduct(productoAux)">+</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-7">
+            <button type="submit" class="btn btn-success btn-block">Crear Proveedor</button>
+            <a ng-click="pcc.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pcc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pcc.message }}
+        </div>
+    </div>
+</div>

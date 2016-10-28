@@ -1,0 +1,68 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Librería Álvarez</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" ng-if="nc.userLogged">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.client.create">Crear Cliente</a></li>
+                        <li><a ui-sref="root.client.edit">Editar Cliente</a></li>
+                        <li><a ui-sref="root.client.delete">Borrar Cliente</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.product.create">Crear Producto</a></li>
+                        <li><a ui-sref="root.product.edit">Editar Producto</a></li>
+                        <li><a ui-sref="root.product.delete">Borrar Producto</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proveedores <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.provider.create">Crear Proveedor</a></li>
+                        <li><a ui-sref="root.provider.edit">Editar Proveedor</a></li>
+                        <li><a ui-sref="root.provider.delete">Borrar Proveedor</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.user.create">Crear Usuario</a></li>
+                        <li><a ui-sref="root.user.edit">Editar Usuario</a></li>
+                        <li><a ui-sref="root.user.delete">Borrar Usuario</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a ui-sref="root.sell.create">Venta</a>
+                </li>
+                <li>
+                    <a ui-sref="root.buy.create">Compra</a>
+                </li>
+                <li>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.report.create">Crear Reporte</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <label>Usuario: {{nc.user.nombre}}</label>
+                    <button class="btn" ng-click="nc.logOut()">Cerrar Sesión</button>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
