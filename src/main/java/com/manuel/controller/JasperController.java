@@ -47,6 +47,8 @@ public class JasperController {
             // Compile jrxml file.
             JasperReport jasperReport = JasperCompileManager
                     .compileReport("E:/jasperinput/report1.jrxml");
+            JasperReport jasperReport2 = JasperCompileManager
+                    .compileReport("E:/jasperinput/report2.jrxml");
             //Venta venta = ventaService.getById(5);
 
             System.out.println(venta.getFecha());
@@ -97,11 +99,15 @@ public class JasperController {
 
             JRBeanCollectionDataSource beanColDataSource =
                     new JRBeanCollectionDataSource(detalleVentasArray);
+            JRBeanCollectionDataSource beanColDataSource2 =
+                    new JRBeanCollectionDataSource(detalleVentasArray);
 
 
             ////
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
                     parameters, beanColDataSource);
+            JasperPrint jasperPrint2 = JasperFillManager.fillReport(jasperReport2,
+                    parameters, beanColDataSource2);
 
             // Make sure the output directory exists.
             File outDir = new File("E:/jasperoutput");
@@ -114,6 +120,8 @@ public class JasperController {
             // Export to PDF.
             JasperExportManager.exportReportToPdfFile(jasperPrint,
                     "E:/jasperoutput/Venta "+fechaPDF+".pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint2,
+                    "E:/jasperoutput/Factura "+fechaPDF+".pdf");
 
             System.out.println("Done!");
 

@@ -40,39 +40,53 @@
             </table>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group" ng-show="pdc.providerSelected">
-            <label class="col-md-4 control-label">Nombre</label>
-            <div class="col-md-7">
-                <input type="text" readonly class="form-control" ng-model="pdc.providerData.nombre" ng-required="!pdc.providerData.nombre">
-            </div>
+
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" readonly class="form-control" ng-model="pdc.providerData.nombre" ng-required="!pdc.providerData.nombre">
         </div>
-        <div class="form-group" ng-show="pdc.providerSelected">
-            <label class="col-md-4 control-label">Email</label>
-            <div class="col-md-7">
-                <input ttype="number" readonly min="0" class="form-control" ng-model="pdc.providerData.email" ng-required="!pdc.providerData.email">
-            </div>
-        </div>
-        <div class="form-group" ng-show="pdc.providerSelected">
-            <label class="col-md-4 control-label">Teléfono</label>
-            <div class="col-md-7">
-                <input type="number" readonly step="any" class="form-control"  ng-model="pdc.providerData.telefono" ng-required="!pdc.providerData.telefono">
-            </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" readonly class="form-control" ng-model="pdc.providerData.apellido" ng-required="!pdc.providerData.apellido">
         </div>
     </div>
-    <div class="col-md-7" ng-show="pdc.providerSelected">
-        <label class="col-md-12">Productos</label>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
-        <div class="col-md-6">
-            <label class="control-label">Seleccionados</label>
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="producto in pdc.providerData.productos">
-                    Nombre: {{producto.nombre}}, Precio: ${{producto.precio}}
-                </li>
-            </ul>
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <label class="col-md-2 control-label">Teléfono</label>
+        <div class="col-md-3">
+            <input type="number" readonly min="0" class="form-control" ng-model="pdc.providerData.telefono" ng-required="!pdc.providerData.telefono">
         </div>
-        <div class="col-md-6">
-
+        <label class="col-md-1">Dirección</label>
+        <div class="col-md-3">
+            <input type="text" readonly class="form-control" ng-model="pdc.providerData.direccion" ng-required="!pdc.providerData.direccion">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pdc.providerData.tipoPersona.descripcion" ng-required="!pdc.providerData.tipoPersona.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" readonly min="0" class="form-control" ng-model="pdc.providerData.nroCuit" ng-required="!pdc.providerData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pdc.providerData.tipoDocumento.descripcion" ng-required="!pdc.providerData.tipoDocumento.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" readonly min="0" class="form-control" ng-model="pdc.providerData.nroDocumento" ng-required="!pdc.providerData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pdc.providerSelected">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-3">
+            <input type="text" readonly class="form-control" ng-model="pdc.providerData.email" ng-required="!pdc.providerData.email">
         </div>
     </div>
     <div class="form-group" ng-show="pdc.providerSelected">

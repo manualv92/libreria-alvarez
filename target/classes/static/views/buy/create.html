@@ -3,58 +3,35 @@
 </div>
 <form class="form-horizontal">
     <div class="col-md-12">
-        <label class="col-md-12">Datos del Proveedor</label>
+        <label>Datos del Proveedor</label>
+        <button class="btn" id="proveedorBtn">Buscar Proveedor</button>
         <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
         <div class="col-md-8">
-            <table class="table table-bordered" ng-show="bcc.buyData.proveedor.nombre.length > 0">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Telefono</th>
-                    <th>Email</th>
-                    <th>Acción</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{bcc.buyData.proveedor.nombre}}</td>
-                    <td>{{bcc.buyData.proveedor.telefono}}</td>
-                    <td>{{bcc.buyData.proveedor.email}}</td>
-                    <td><button class="btn btn-danger btn-xs" ng-click="bcc.removeProvider( )">X</button></td>
-                </tr>
-                </tbody>
-            </table>
-            <!--ul class="provider-edit-product-list">
-                <li ng-show="bcc.buyData.proveedor.nombre.length > 0">
-                    Nombre: {{bcc.buyData.proveedor.nombre}}, Email: {{bcc.buyData.proveedor.email}}
-                    <button class="btn btn-danger btn-xs" ng-click="bcc.removeProvider( )">X</button>
-                </li>
-            </ul-->
-        </div>
-        <div class="col-md-4">
-            <label class="control-label">Proveedores</label>
-            <input type="text" ng-model="bcc.textoBuscadorProveedor">
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="proveedorAux in bcc.proveedoresAux | filter:bcc.textoBuscadorProveedor">
-                    Nombre: {{proveedorAux.nombre}}, Email: {{proveedorAux.email}}
-                    <button class="btn btn-success btn-xs" ng-click="bcc.addProvider(proveedorAux)">+</button>
-                </li>
-            </ul>
+            <div class="form-group">
+                <label class="col-md-1">Nombre: </label>
+                <div class="col-md-3">
+                    {{bcc.buyData.proveedor.nombre}} {{bcc.buyData.proveedor.apellido}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">Dirección: </label>
+                <div class="col-md-3">
+                    {{bcc.buyData.proveedor.direccion}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">CUIT: </label>
+                <div class="col-md-3">
+                    {{bcc.buyData.proveedor.nroCuit}}
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-12">
-        <label class="col-md-12">Detalle de Compra</label>
+        <label>Detalle de Compra</label>
+        <button class="btn" id="productoCompraBtn">Buscar Productos</button>
         <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
         <div class="col-md-8">
-            <!--ul class="provider-edit-product-list">
-                <li ng-repeat="producto in bcc.buyData.productos">
-                    Nombre: {{producto.nombre}}, Precio: $
-                    <input type="number" min="0" step="any" ng-model="producto.precio" ng-required="!producto.precio">
-                    , Precio Venta: $ <input type="number" min="0" step="any" ng-model="producto.precioVenta" ng-required="!producto.precioVenta">, Cantidad:
-                    <input type="number" min="0" ng-change="bcc.carcularTotal()" ng-model="producto.cantidad" ng-required="!producto.cantidad">
-                    <button class="btn btn-danger btn-xs" ng-click="bcc.removeProduct(producto)">X</button>
-                </li>
-            </ul-->
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -79,15 +56,6 @@
             </table>
             <p class="text-right venta-total">Total: {{bcc.buyData.total}}</p>
         </div>
-        <div class="col-md-4">
-            <label class="control-label">Disponibles</label>
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="productoAux in bcc.productosAux">
-                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precio}}
-                    <button class="btn btn-success btn-xs" ng-click="bcc.addProduct(productoAux)">+</button>
-                </li>
-            </ul>
-        </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-5 col-md-7">
@@ -96,6 +64,112 @@
         </div>
     </div>
 </form>
+
+<!-- The Modal -->
+<div id="proveedorModal" class="compra-proveedor-modal">
+
+    <!-- Modal content -->
+    <div class="compra-proveedor-modal-content">
+        <div class="compra-proveedor-modal-header">
+            <span class="compra-proveedor-close">×</span>
+            <h2>Buscador de proveedores</h2>
+        </div>
+        <div class="compra-proveedor-modal-body">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Nombre del proveedor</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="bcc.providerName" ng-required="!bcc.providerName">
+                </div>
+                <button type="button" ng-click="bcc.searchProveedoresByName()" class="btn btn-success">Buscar</button>
+            </div>
+            <div class="row show-hide-message" ng-show="bcc.searchMessage">
+                <div class="col-md-7 col-md-offset-2">
+                    <div class="alert alert-warning">
+                        {{ bcc.searchMessage }}
+                    </div>
+                </div>
+            </div>
+            <div ng-show="bcc.proveedoresAux.length > 0">
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Telefono</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="provider in bcc.proveedoresAux">
+                            <th scope="row">{{pec.searchedProviders.indexOf(provider)}}</th>
+                            <td>{{provider.nombre}}</td>
+                            <td>{{provider.telefono}}</td>
+                            <td>{{provider.email}}</td>
+                            <td><button ng-click="bcc.selectProviderForBuy(provider)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- The Modal -->
+<div id="productoCompraModal" class="compra-producto-modal">
+
+    <!-- Modal content -->
+    <div class="compra-producto-modal-content">
+        <div class="compra-producto-modal-header">
+            <span class="compra-producto-close">×</span>
+            <h2>Buscador de productos</h2>
+        </div>
+        <div class="compra-producto-modal-body">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Nombre del producto</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="bcc.productName" ng-required="!bcc.productName">
+                </div>
+                <button type="button" ng-click="bcc.searchProductosByName()" class="btn btn-success">Buscar</button>
+            </div>
+            <div class="row show-hide-message" ng-show="bcc.searchProductMessage">
+                <div>
+                    <div class="alert alert-warning">
+                        {{ bcc.searchProductMessage }}
+                    </div>
+                </div>
+            </div>
+            <div ng-show="bcc.productosAux.length > 0">
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="product in bcc.productosAux">
+                            <th scope="row">{{pec.productosAux.indexOf(product)}}</th>
+                            <td>{{product.nombre}}</td>
+                            <td>{{product.precio}}</td>
+                            <td>{{product.stock}}</td>
+                            <td><button ng-click="bcc.selectProductForBuy(product)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="row show-hide-message" ng-show="bcc.message">
     <div class="col-md-7 col-md-offset-2">

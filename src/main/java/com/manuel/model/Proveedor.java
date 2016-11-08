@@ -12,9 +12,20 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String nombre;
+    private String apellido;
     private long telefono;
     private String email;
+    private String direccion;
     private int habilitado;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo_documento")
+    private TipoDocumento tipoDocumento;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_tipo_persona")
+    private TipoPersona tipoPersona;
+    private long nroDocumento;
+    private long nroCuit;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "proveedor")
     @JsonIgnore
     private List<Compra> compras;
@@ -28,13 +39,19 @@ public class Proveedor {
 
     public Proveedor(){}
 
-    public Proveedor(long id, String nombre, long telefono, String email, int habilitado, List<Producto> productos) {
+    public Proveedor(long id, String nombre, String apellido, long telefono, String email, String direccion, int habilitado, List<Producto> productos, TipoDocumento tipoDocumento, TipoPersona tipoPersona, long nroDocumento, long nroCuit) {
         this.id = id;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
+        this.direccion = direccion;
         this.habilitado = habilitado;
         this.productos = productos;
+        this.tipoDocumento = tipoDocumento;
+        this.tipoPersona = tipoPersona;
+        this.nroDocumento = nroDocumento;
+        this.nroCuit = nroCuit;
     }
 
 
@@ -54,6 +71,10 @@ public class Proveedor {
         this.nombre = nombre;
     }
 
+    public String getApellido() {return apellido;}
+
+    public void setApellido(String apellido) {this.apellido = apellido;}
+
     public long getTelefono() {
         return telefono;
     }
@@ -70,6 +91,10 @@ public class Proveedor {
         this.email = email;
     }
 
+    public String getDireccion() {return direccion;}
+
+    public void setDireccion(String direccion) {this.direccion = direccion;}
+
     public int getHabilitado() {
         return habilitado;
     }
@@ -85,6 +110,22 @@ public class Proveedor {
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
+
+    public TipoDocumento getTipoDocumento() {return tipoDocumento;}
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {this.tipoDocumento = tipoDocumento;}
+
+    public TipoPersona getTipoPersona() {return tipoPersona;}
+
+    public void setTipoPersona(TipoPersona tipoPersona) {this.tipoPersona = tipoPersona;}
+
+    public long getNroDocumento() {return nroDocumento;}
+
+    public void setNroDocumento(long nroDocumento) {this.nroDocumento = nroDocumento;}
+
+    public long getNroCuit() {return nroCuit;}
+
+    public void setNroCuit(long nroCuit) {this.nroCuit = nroCuit;}
 
     @JsonIgnore
     public List<Compra> getCompras() { return compras; }

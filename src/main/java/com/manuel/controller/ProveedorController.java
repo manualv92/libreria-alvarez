@@ -55,6 +55,9 @@ public class ProveedorController {
                 System.out.println(pro.getId());
                 System.out.println(pro.getEmail());
                 System.out.println(pro.getNombre());
+                System.out.println(pro.getApellido());
+                System.out.println(pro.getNroDocumento());
+                System.out.println(pro.getNroCuit());
             }
             String jsonProveedores= JsonParser.proveedorListToJson(proveedorList);
             return new ResponseEntity<>(jsonProveedores, headers, HttpStatus.OK);

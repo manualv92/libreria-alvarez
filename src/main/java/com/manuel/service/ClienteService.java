@@ -36,7 +36,13 @@ public class ClienteService {
     }
 
     public List<Cliente> getClienteByNameAndHabilitado(String clientName, int clientHabilitado){
-        List<Cliente> resultado = repository.findByNombreAndHabilitado(clientName, clientHabilitado);
+        List<Cliente> resultado = repository.findByNombreContainingIgnoreCaseAndHabilitado(clientName, clientHabilitado);
+        return resultado;
+    }
+
+    /////////
+    public List<Cliente> getClienteByNameContainingIgnoreCase(String clientName){
+        List<Cliente> resultado = repository.findByNombreContainingIgnoreCase(clientName);
         return resultado;
     }
 

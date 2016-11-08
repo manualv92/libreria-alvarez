@@ -40,46 +40,53 @@
             </table>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="form-group" ng-show="pec.providerSelected">
-            <label class="col-md-4 control-label">Nombre</label>
-            <div class="col-md-7">
-                <input type="text" class="form-control" ng-model="pec.providerData.nombre" ng-required="!pec.providerData.nombre">
-            </div>
+
+    <div class="form-group" ng-show="pec.providerSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.providerData.nombre" ng-required="!pec.providerData.nombre">
         </div>
-        <div class="form-group" ng-show="pec.providerSelected">
-            <label class="col-md-4 control-label">Email</label>
-            <div class="col-md-7">
-                <input ttype="number" min="0" class="form-control" ng-model="pec.providerData.email" ng-required="!pec.providerData.email">
-            </div>
-        </div>
-        <div class="form-group" ng-show="pec.providerSelected">
-            <label class="col-md-4 control-label">Teléfono</label>
-            <div class="col-md-7">
-                <input type="number" step="any" class="form-control"  ng-model="pec.providerData.telefono" ng-required="!pec.providerData.telefono">
-            </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.providerData.apellido" ng-required="!pec.providerData.apellido">
         </div>
     </div>
-    <div class="col-md-7" ng-show="pec.providerSelected">
-        <label class="col-md-12">Productos</label>
-        <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
-        <div class="col-md-6">
-            <label class="control-label">Seleccionados</label>
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="producto in pec.providerData.productos">
-                    Nombre: {{producto.nombre}}, Precio: ${{producto.precio}}
-                    <button class="btn btn-danger btn-xs" ng-click="pec.removeProduct(producto)">X</button>
-                </li>
-            </ul>
+    <div class="form-group" ng-show="pec.providerSelected">
+        <label class="col-md-2 control-label">Teléfono</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-model="pec.providerData.telefono" ng-required="!pec.providerData.telefono">
         </div>
-        <div class="col-md-6">
-            <label class="control-label">Disponibles</label>
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="productoAux in pec.productosAux">
-                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precio}}
-                    <button class="btn btn-success btn-xs" ng-click="pec.addProduct(productoAux)">+</button>
-                </li>
-            </ul>
+        <label class="col-md-1">Dirección</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.providerData.direccion" ng-required="!pec.providerData.direccion">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.providerSelected">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pec.providerData.tipoPersona.descripcion" ng-required="!pec.providerData.tipoPersona.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-blur="pec.esCUITValida(pec.providerData.nroCuit)" ng-model="pec.providerData.nroCuit" ng-required="!pec.providerData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.providerSelected">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pec.providerData.tipoDocumento.descripcion" ng-required="!pec.providerData.tipoDocumento.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-readonly="pec.providerData.tipoPersona.id==2" ng-model="pec.providerData.nroDocumento" ng-required="!pec.providerData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pec.providerSelected">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pec.providerData.email" ng-required="!pec.providerData.email">
         </div>
     </div>
     <div class="form-group" ng-show="pec.providerSelected">

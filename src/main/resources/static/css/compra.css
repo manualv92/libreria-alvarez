@@ -1,25 +1,5 @@
-.venta-table-input {
-    width: 40px;
-}
-.venta-table-cantidad {
-    width: 80px;
-}
-.venta-table-precio-input {
-    width: 80px;
-}
-.venta-table-accion {
-    width: 60px;
-}
-.venta-total {
-    font-weight: 600;
-    padding-right: 110px;
-}
-.venta-table-precio-venta {
-    width:110px;
-}
-
 /* The Modal (background) */
-.venta-cliente-modal {
+.compra-proveedor-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -34,7 +14,7 @@
 }
 
 /* Modal Content */
-.venta-cliente-modal-content {
+.compra-proveedor-modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -60,36 +40,36 @@
 }
 
 /* The Close Button */
-.venta-cliente-close {
+.compra-proveedor-close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.venta-cliente-close:hover,
-.venta-cliente-close:focus {
+.compra-proveedor-close:hover,
+.compra-proveedor-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.venta-cliente-modal-header {
+.compra-proveedor-modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.venta-cliente-modal-body {padding: 2px 16px;}
+.compra-proveedor-modal-body {padding: 2px 16px;}
 
-.venta-cliente-modal-footer {
+.compra-proveedor-modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
 /* The Modal (background) */
-.venta-producto-modal {
+.compra-producto-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -104,7 +84,7 @@
 }
 
 /* Modal Content */
-.venta-producto-modal-content {
+.compra-producto-modal-content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -130,30 +110,29 @@
 }
 
 /* The Close Button */
-.venta-producto-close {
+.compra-producto-close {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.venta-producto-close:hover,
-.venta-producto-close:focus {
+.compra-producto-close:hover,
+.compra-producto-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.venta-producto-modal-header {
+.compra-producto-modal-header {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
 }
 
-.venta-producto-modal-body {padding: 2px 16px;}
+.compra-producto-modal-body {padding: 2px 16px;}
 
-.venta-producto-modal-footer {
+.compra-producto-modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
-}

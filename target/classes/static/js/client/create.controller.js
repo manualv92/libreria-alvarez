@@ -19,7 +19,7 @@ angular.module('clientModule')
         vm.cleanCuitNumber = function() {
         console.log(vm.clientData.tipoPersona)
             if(vm.clientData.tipoPersona.id == 1){
-                vm.clientData.nroCuit = null;
+                //vm.clientData.nroCuit = null;
             }else{
                  vm.clientData.nroDocumento = null;
             }
@@ -27,6 +27,9 @@ angular.module('clientModule')
 
         vm.createClient = function() {
             if(vm.cuitValido){
+                if(vm.clientData.tipoPersona.id == 2){
+                    vm.clientData.tipoDocumento = null;
+                }
                 clientService.create(vm.clientData)
                     .then(function(res) {
                         console.log(res.data.success);

@@ -7,8 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    List<Cliente> findByNombreLike(String nombre);
-    List<Cliente> findByNombreAndHabilitado(String nombre, int habilitado);
+    List<Cliente> findByNombreContainingIgnoreCase(String nombre);
+    List<Cliente> findByNombreContainingIgnoreCaseAndHabilitado(String nombre, int habilitado);
     List<Cliente> findByNroDocumento(Long nroDocumento);
     Cliente findById(long id);
 }

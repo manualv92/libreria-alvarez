@@ -20,7 +20,7 @@ public class ProveedorService {
     }
 
     public List<Proveedor> getProveedorByNameAndHabilitado(String providerName, int providerHabilitado){
-        List<Proveedor> resultado = repository.findByNombreAndHabilitado(providerName, providerHabilitado);
+        List<Proveedor> resultado = repository.findByNombreContainingIgnoreCaseAndHabilitado(providerName, providerHabilitado);
         return resultado;
     }
 

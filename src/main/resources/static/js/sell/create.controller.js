@@ -11,11 +11,47 @@ angular.module('sellModule')
 		vm.sellData.usuario = {};
 		vm.textoBuscadorProducto = "";
 		vm.textoBuscadorCliente = "";
-        getProductos();
-        getClientes();
         getUsuario();
 
         vm.math = window.Math;
+
+        // Get Client y Product Modal
+        var clienteModal = document.getElementById('clienteModal');
+        var productoModal = document.getElementById('productoModal');
+
+        // Get the button that opens the modals
+        var clienteBtn = document.getElementById("clienteBtn");
+        var productoBtn = document.getElementById("productoBtn");
+
+        // Get the <span> element that closes the modal
+        var clienteSpan = document.getElementsByClassName("venta-cliente-close")[0];
+        var productoSpan = document.getElementsByClassName("venta-producto-close")[0];
+
+        // When the user clicks the button, open the modal
+        clienteBtn.onclick = function() {
+            clienteModal.style.display = "block";
+        }
+        productoBtn.onclick = function() {
+            productoModal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        clienteSpan.onclick = function() {
+            clienteModal.style.display = "none";
+        }
+        productoSpan.onclick = function() {
+            productoModal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == clienteModal) {
+                clienteModal.style.display = "none";
+            }
+            if (event.target == productoModal) {
+                productoModal.style.display = "none";
+            }
+        }
 
         vm.createSell = function() {
             console.log("Entro a crear venta");
@@ -34,8 +70,7 @@ angular.module('sellModule')
                             vm.sellData = {};
                             vm.sellData.productos = [];
                             vm.sellData.cliente = {};
-                            getProductos();
-                            getClientes();
+                            getUsuario();
                         });
                 }else{
                     vm.message = "Debe ingresar una cantidad valida de producto";
@@ -43,24 +78,6 @@ angular.module('sellModule')
             }
 
 
-        };
-
-        function getProductos(){
-            productService.getAll()
-                .then(function(res) {
-                    console.log(res.data);
-                    vm.productosAux = res.data;
-                    console.log(vm.productosAux);
-                });
-        };
-
-        function getClientes(){
-            clientService.getAll()
-                .then(function(res) {
-                    console.log(res.data);
-                    vm.clientesAux = res.data;
-                    console.log(vm.clientesAux);
-                });
         };
 
         function getUsuario(){
@@ -89,11 +106,28 @@ angular.module('sellModule')
             vm.productosAux.push(product);
         };
 
+        //DEPRECADO
         vm.addProduct = function(productAux){
             vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
             productAux.cantidad = 1;
             vm.sellData.productos.push(productAux);
             vm.calcularTotal();
+        };
+
+        vm.selectProductForSell = function(productAux){
+            var encontro = false;
+            angular.forEach(vm.sellData.productos, function(producto, key){
+                if(producto.id == productAux.id){
+                    producto.cantidad = producto.cantidad + 1;
+                    encontro = true;
+                }
+            })
+            if(!encontro){
+                //vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
+                productAux.cantidad = 1;
+                vm.sellData.productos.push(productAux);
+            }
+                vm.calcularTotal();
         };
 
         vm.removeClient = function(){
@@ -102,6 +136,7 @@ angular.module('sellModule')
             vm.sellData.cliente = {};
         };
 
+        //DEPRECADO
         vm.addClient = function(clienteAux){
             vm.message = "";
             if(isEmpty(vm.sellData.cliente)){
@@ -111,6 +146,40 @@ angular.module('sellModule')
                 vm.message = "Solo se puede ingresar 1 cliente por compra";
             }
         };
+
+        vm.selectClientForSell = function(clienteAux){
+            vm.sellData.cliente = clienteAux;
+        };
+
+        vm.searchClientesByName = function() {
+            clientService.getClientesByName(vm.clientName)
+                .then(function(res) {
+                    vm.message = "";
+                    vm.clientesAux = [];
+                    vm.clientSelected = false;
+                    vm.searchMessage = "";
+                    console.log(res.data);
+                    vm.clientesAux = res.data;
+                    if(res.data.length==0){
+                        vm.searchMessage = "No se encontró ningún cliente con ese nombre!"
+                    }
+                });
+        }
+
+        vm.searchProductosByName = function() {
+            productService.getProductosByName(vm.productName)
+                .then(function(res) {
+                    vm.message = "";
+                    vm.productosAux = [];
+                    vm.productSelected = false;
+                    vm.searchProductMessage = "";
+                    console.log(res.data);
+                    vm.productosAux = res.data;
+                    if(res.data.length==0){
+                        vm.searchProductMessage = "No se encontró ningún producto con ese nombre!"
+                    }
+                });
+        }
 
         function isEmpty(myObject) {
             for(var key in myObject) {

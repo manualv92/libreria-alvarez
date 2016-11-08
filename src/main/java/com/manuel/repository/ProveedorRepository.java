@@ -9,6 +9,6 @@ import java.util.List;
  * Created by manua on 1/10/2016.
  */
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
-    List<Proveedor> findByNombreAndHabilitado(String nombre, int habilitado);
+    List<Proveedor> findByNombreContainingIgnoreCaseAndHabilitado(String nombre, int habilitado);
     Proveedor findById(long id);
 }

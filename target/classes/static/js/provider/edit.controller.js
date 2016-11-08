@@ -6,7 +6,7 @@ angular.module('providerModule')
 		var vm = this;
 		vm.providerData = {};
 		vm.searchedProviders = [];
-        getProductos();
+		vm.cuitValido = true;
 
 		vm.searchProveedoresByName = function() {
 		    providerService.getProveedoresByName(vm.providerName)
@@ -27,49 +27,37 @@ angular.module('providerModule')
 		vm.selectProviderForUpdate = function(provider) {
 		    vm.providerData = provider;
 		    vm.providerSelected = true;
-		    angular.forEach(vm.providerData.productos, function(producto, key) {
-		        angular.forEach(vm.productosAux, function(productoAux, key){
-		            console.log(producto);
-		            console.log(productoAux);
-		            if(producto.id==productoAux.id){
-		                console.log("Son iguales");
-		                vm.productosAux.splice(vm.productosAux.indexOf(productoAux),1);
-		            }else{
-		                console.log("No son iguales");
-		            }
-		        });
-		    });
 		}
 
-		function getProductos(){
-            productService.getAll()
-                .then(function(res) {
-                console.log(res.data);
-                    vm.productosAux = res.data;
-                    console.log(vm.productosAux);
-                });
+        vm.esCUITValida = function(inputValor) {
+            inputString = inputValor.toString()
+            if (inputString.length == 11) {
+                var Caracters_1_2 = inputString.charAt(0) + inputString.charAt(1)
+                if (Caracters_1_2 == "20" || Caracters_1_2 == "23" || Caracters_1_2 == "24" || Caracters_1_2 == "27" || Caracters_1_2 == "30" || Caracters_1_2 == "33" || Caracters_1_2 == "34") {
+                    var Count = inputString.charAt(0) * 5 + inputString.charAt(1) * 4 + inputString.charAt(2) * 3 + inputString.charAt(3) * 2 + inputString.charAt(4) * 7 + inputString.charAt(5) * 6 + inputString.charAt(6) * 5 + inputString.charAt(7) * 4 + inputString.charAt(8) * 3 + inputString.charAt(9) * 2 + inputString.charAt(10) * 1
+                    Division = Count / 11;
+                    if (Division == Math.floor(Division)) {
+                        vm.cuitValido = true;
+                        console.log('CUIT TRUE');
+                        return true
+                    }
+                }
+            }
+            vm.cuitValido = false;
+            console.log('CUIT FALSE');
+            return false
         }
-
-		vm.removeProduct = function(product){
-		    vm.providerData.productos.splice(vm.providerData.productos.indexOf(product),1);
-		    vm.productosAux.push(product);
-		}
-
-		vm.addProduct = function(productAux){
-		    vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
-		    vm.providerData.productos.push(productAux);
-		}
 
         vm.updateProvider = function() {
             console.log(vm.providerData);
-                providerService.update(vm.providerData)
-                    .then(function(res) {
-                        if(res.data.success){
-                            vm.message = "Se editó el proveedor con éxito!";
-                        }else{
-                            vm.message = "Hubo un error en la edición del proveedor, intente nuevamente!"
-                        }
-                    });
+                if(vm.cuitValido){
+                    providerService.update(vm.providerData)
+                        .then(function(res) {
+                            vm.message = res.data.message;
+                        });
+                }else{
+                    vm.message = "Debe ingresar un CUIT válido";
+                }
         };
 
 		vm.goBack = function() {

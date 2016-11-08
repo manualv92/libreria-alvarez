@@ -15,6 +15,9 @@ public class TipoDocumento {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tipoDocumento")
     @JsonIgnore
     private List<Cliente> clientes;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tipoDocumento")
+    @JsonIgnore
+    private List<Proveedor> proveedores;
 
     public TipoDocumento(){}
 
@@ -39,6 +42,16 @@ public class TipoDocumento {
     @JsonIgnore
     public void setClientes(List<Cliente> clientes) {
         this.clientes = clientes;
+    }
+
+    @JsonIgnore
+    public List<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    @JsonIgnore
+    public void setProveedores(List<Proveedor> proveedores) {
+        this.proveedores = proveedores;
     }
 
     public int getId() {

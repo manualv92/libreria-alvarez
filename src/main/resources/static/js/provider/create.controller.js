@@ -2,41 +2,80 @@ angular.module('providerModule')
 		.controller('ProviderCreateController', ProviderCreateController);
 
     /*@ngInject*/
-	function ProviderCreateController(providerService, productService, $timeout, $injector, $q) {
+	function ProviderCreateController(providerService, clientService, productService, $timeout, $injector, $q) {
 
 		var vm = this;
 		vm.providerData = {};
+        vm.providerData.tipoPersona = {};
+        vm.providerData.tipoDocumento = {};
 		vm.providerData.habilitado = 1;
 		vm.providerData.productos = [];
-        getProductos();
+		vm.providerData.tipoPersonaList = [];
+        vm.providerData.tipoDocumentoList = [];
+        getTipoPersonas();
+        getTipoDocumento();
 
         vm.createProvider = function() {
-            providerService.create(vm.providerData)
-                .then(function(res) {
-                    vm.message = res.data.message;
-                    vm.providerData = {};
-                    vm.providerData.habilitado = 1;
-                    getProductos();
-                });
+            if(vm.cuitValido){
+                if(vm.providerData.tipoPersona.id == 2){
+                    vm.providerData.tipoDocumento = null;
+                }
+                providerService.create(vm.providerData)
+                    .then(function(res) {
+                        vm.message = res.data.message;
+                        vm.providerData = {};
+                        vm.providerData.habilitado = 1;
+                        //getProductos();
+                    });
+            }else{
+                vm.message = "Debe ingresar un CUIT válido";
+            }
         };
 
-        function getProductos(){
-            productService.getAll()
+        vm.cleanCuitNumber = function() {
+            console.log(vm.providerData.tipoPersona)
+            if(vm.providerData.tipoPersona.id == 1){
+                //vm.providerData.nroCuit = null;
+            }else{
+                 vm.providerData.nroDocumento = null;
+            }
+        }
+
+        vm.esCUITValida = function(inputValor) {
+            inputString = inputValor.toString()
+            if (inputString.length == 11) {
+                var Caracters_1_2 = inputString.charAt(0) + inputString.charAt(1)
+                if (Caracters_1_2 == "20" || Caracters_1_2 == "23" || Caracters_1_2 == "24" || Caracters_1_2 == "27" || Caracters_1_2 == "30" || Caracters_1_2 == "33" || Caracters_1_2 == "34") {
+                    var Count = inputString.charAt(0) * 5 + inputString.charAt(1) * 4 + inputString.charAt(2) * 3 + inputString.charAt(3) * 2 + inputString.charAt(4) * 7 + inputString.charAt(5) * 6 + inputString.charAt(6) * 5 + inputString.charAt(7) * 4 + inputString.charAt(8) * 3 + inputString.charAt(9) * 2 + inputString.charAt(10) * 1
+                    Division = Count / 11;
+                    if (Division == Math.floor(Division)) {
+                        vm.cuitValido = true;
+                        console.log('CUIT TRUE');
+                        return true
+                    }
+                }
+            }
+            vm.cuitValido = false;
+            console.log('CUIT FALSE');
+            return false
+        }
+
+        function getTipoPersonas(){
+            clientService.getTipoPersonas()
                 .then(function(res) {
                 console.log(res.data);
-                    vm.productosAux = res.data;
-                    console.log(vm.productosAux);
+                    vm.providerData.tipoPersonaList = res.data;
+                    console.log(vm.providerData.tipoPersonaList);
                 });
         }
 
-        vm.removeProduct = function(product){
-            vm.providerData.productos.splice(vm.providerData.productos.indexOf(product),1);
-            vm.productosAux.push(product);
-        }
-
-        vm.addProduct = function(productAux){
-            vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
-            vm.providerData.productos.push(productAux);
+        function getTipoDocumento(){
+            clientService.getTipoDocumento()
+                .then(function(res) {
+                console.log(res.data);
+                    vm.providerData.tipoDocumentoList = res.data;
+                    console.log(vm.providerData.tipoDocumentoList);
+                });
         }
 
 		vm.goBack = function() {

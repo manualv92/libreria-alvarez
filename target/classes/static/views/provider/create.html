@@ -2,27 +2,57 @@
     <h3>Crear un proveedor</h3>
 </div>
 <form class="form-horizontal" ng-submit="pcc.createProvider()">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label class="col-md-4 control-label">Nombre</label>
-            <div class="col-md-7">
-                <input type="text" class="form-control" ng-model="pcc.providerData.nombre" ng-required="!pcc.providerData.nombre">
-            </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.providerData.nombre" ng-required="!pcc.providerData.nombre">
         </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label">Teléfono</label>
-            <div class="col-md-7">
-                <input type="number" min="0" class="form-control" ng-model="pcc.providerData.telefono" ng-required="!pcc.providerData.telefono">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-4 control-label">Email</label>
-            <div class="col-md-7">
-                <input type="email" class="form-control" ng-model="pcc.providerData.email" ng-required="!pcc.providerData.email">
-            </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" ng-readonly="pcc.providerData.tipoPersona.id==2" class="form-control" ng-model="pcc.providerData.apellido" ng-required="!pcc.providerData.apellido">
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Teléfono</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-model="pcc.providerData.telefono" ng-required="!pcc.providerData.telefono">
+        </div>
+        <label class="col-md-1">Dirección</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.providerData.direccion" ng-required="!pcc.providerData.direccion">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-change="pcc.cleanCuitNumber()" ng-model="pcc.providerData.tipoPersona" ng-options="tipoP as tipoP.descripcion for tipoP in pcc.providerData.tipoPersonaList" ng-required="!pcc.providerData.tipoPersona">
+            </select>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-blur="pcc.esCUITValida(pcc.providerData.nroCuit)" ng-model="pcc.providerData.nroCuit" ng-required="!pcc.providerData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <select class="form-control" ng-readonly="pcc.providerData.tipoPersona.id==2" ng-model="pcc.providerData.tipoDocumento" ng-options="tipoD as tipoD.descripcion for tipoD in pcc.providerData.tipoDocumentoList" ng-required="!pcc.providerData.tipoDocumento">
+            </select>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" ng-readonly="pcc.providerData.tipoPersona.id==2" ng-model="pcc.providerData.nroDocumento" ng-required="!pcc.providerData.nroDocumento">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.providerData.email" ng-required="!pcc.providerData.email">
+        </div>
+    </div>
+
+    <!--div class="col-md-7">
         <label class="col-md-12">Productos</label>
         <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
         <div class="col-md-6">
@@ -43,7 +73,7 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div-->
     <div class="form-group">
         <div class="col-md-offset-2 col-md-7">
             <button type="submit" class="btn btn-success btn-block">Crear Proveedor</button>

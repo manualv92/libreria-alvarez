@@ -3,67 +3,35 @@
 </div>
 <form class="form-horizontal">
     <div class="col-md-12">
-        <label class="col-md-12">Datos del Cliente</label>
+        <label >Datos del Cliente</label>
+        <button class="btn" id="clienteBtn">Buscar Cliente</button>
         <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
         <div class="col-md-8">
-            <table class="table table-bordered" ng-show="scc.sellData.cliente.nombre.length > 0">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>CUIT</th>
-                    <th>Acción</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{scc.sellData.cliente.nombre}}</td>
-                    <td>{{scc.sellData.cliente.apellido}}</td>
-                    <td>{{scc.sellData.cliente.nroCuit}}</td>
-                    <td><button class="btn btn-danger btn-xs" ng-click="scc.removeClient()">X</button></td>
-                </tr>
-                </tbody>
-            </table>
-            <!--label class="control-label">Nombre:</label>
-            <input type="text" readonly ng-model="scc.sellData.cliente.nombre">
-            <label class="control-label">Apellido:</label>
-            <input type="text" readonly ng-model="scc.sellData.cliente.apellido">
-            <label class="control-label">Cuit:</label>
-            <input type="text" readonly ng-model="scc.sellData.cliente.cuit"-->
-
-            <!--ul class="provider-edit-product-list">
-                <li ng-show="scc.sellData.cliente.nombre.length > 0">
-                    Nombre: {{scc.sellData.cliente.nombre}}, Email: {{scc.sellData.cliente.email}}
-                    <button class="btn btn-danger btn-xs" ng-click="scc.removeClient()">X</button>
-                </li>
-            </ul-->
-        </div>
-        <div class="col-md-4">
-            <label class="control-label">Clientes</label>
-            <input type="text" ng-model="scc.textoBuscadorCliente">
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="clienteAux in scc.clientesAux | filter:scc.textoBuscadorCliente">
-                    Nombre: {{clienteAux.nombre}}, Email: {{clienteAux.email}}
-                    <button class="btn btn-success btn-xs" ng-click="scc.addClient(clienteAux)">+</button>
-                </li>
-            </ul>
+            <div class="form-group">
+                <label class="col-md-1">Nombre: </label>
+                <div class="col-md-3">
+                    {{scc.sellData.cliente.nombre}} {{scc.sellData.cliente.apellido}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">Domicilio: </label>
+                <div class="col-md-3">
+                    {{scc.sellData.cliente.domicilio}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1">CUIT: </label>
+                <div class="col-md-3">
+                    {{scc.sellData.cliente.nroCuit}}
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-12">
-        <label class="col-md-12">Detalle de Venta</label>
+        <label>Detalle de Venta</label>
+        <button class="btn" id="productoBtn">Buscar Productos</button>
         <hr style="width: 100%; color: grey; height: 1px; background-color:light-grey;" />
         <div class="col-md-8">
-            <!--label class="control-label">Seleccionados</label>
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="producto in scc.sellData.productos">
-                    Nombre: {{producto.nombre}}, Precio Venta: $
-                    <input readonly type="number" min="0" step="any" ng-model="producto.precioVenta" ng-required="!producto.precioVenta">
-                    , Cantidad:
-                    <input type="number" min="0" ng-change="scc.carcularTotal()" ng-model="producto.cantidad" ng-required="!producto.cantidad">
-                    <button class="btn btn-danger btn-xs" ng-click="scc.removeProduct(producto)">X</button>
-                </li>
-            </ul>
-            <label>Total: {{scc.sellData.total}}</label-->
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -86,16 +54,10 @@
             </table>
             <p class="text-right venta-total">Total: {{scc.sellData.total}}</p>
         </div>
-        <div class="col-md-4">
+        <!--div class="col-md-4">
             <label class="control-label">Productos</label>
-            <input type="text" ng-model="scc.textoBuscadorProducto">
-            <ul class="provider-edit-product-list">
-                <li ng-repeat="productoAux in scc.productosAux | filter:scc.textoBuscadorProducto">
-                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precioVenta}}
-                    <button class="btn btn-success btn-xs" ng-click="scc.addProduct(productoAux)">+</button>
-                </li>
-            </ul>
-        </div>
+            <button id="productoBtn">Buscar Productos</button>
+        </div-->
     </div>
     <div class="form-group">
         <div class="col-md-offset-5 col-md-7">
@@ -104,6 +66,126 @@
         </div>
     </div>
 </form>
+
+<!-- The Modal -->
+<div id="clienteModal" class="venta-cliente-modal">
+
+    <!-- Modal content -->
+    <div class="venta-cliente-modal-content">
+        <div class="venta-cliente-modal-header">
+            <span class="venta-cliente-close">×</span>
+            <h2>Buscador de clientes</h2>
+        </div>
+        <div class="venta-cliente-modal-body">
+            <!--input type="text" ng-model="scc.textoBuscadorCliente">
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="clienteAux in scc.clientesAux | filter:scc.textoBuscadorCliente">
+                    Nombre: {{clienteAux.nombre}}, Email: {{clienteAux.email}}
+                    <button class="btn btn-success btn-xs" ng-click="scc.addClient(clienteAux)">+</button>
+                </li>
+            </ul-->
+            <div>
+                <label class="col-md-2 control-label">Ingrese nombre del Cliente</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="scc.clientName" ng-required="!scc.clientName">
+                </div>
+                <button type="button" ng-click="scc.searchClientesByName()" class="btn btn-success">Buscar</button>
+            </div>
+            <div class="row show-hide-message" ng-show="scc.searchMessage">
+                <div>
+                    <div class="alert alert-warning">
+                        {{ scc.searchMessage }}
+                    </div>
+                </div>
+            </div>
+            <div ng-show="scc.clientesAux.length > 0">
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="client in scc.clientesAux">
+                            <th scope="row">{{scc.clientesAux.indexOf(client)}}</th>
+                            <td>{{client.nombre}}</td>
+                            <td>{{client.apellido}}</td>
+                            <td>{{client.email}}</td>
+                            <td><button ng-click="scc.selectClientForSell(client)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- The Modal -->
+<div id="productoModal" class="venta-producto-modal">
+
+    <!-- Modal content -->
+    <div class="venta-producto-modal-content">
+        <div class="venta-producto-modal-header">
+            <span class="venta-producto-close">×</span>
+            <h2>Buscador de productos</h2>
+        </div>
+        <div class="venta-producto-modal-body">
+            <!--input type="text" ng-model="scc.textoBuscadorProducto">
+            <ul class="provider-edit-product-list">
+                <li ng-repeat="productoAux in scc.productosAux | filter:scc.textoBuscadorProducto">
+                    Nombre: {{productoAux.nombre}}, Precio: ${{productoAux.precioVenta}}
+                    <button class="btn btn-success btn-xs" ng-click="scc.addProduct(productoAux)">+</button>
+                </li>
+            </ul-->
+            <div class="form-group">
+                <label class="col-md-2 control-label">Nombre del producto</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" ng-model="scc.productName" ng-required="!scc.productName">
+                </div>
+                <button type="button" ng-click="scc.searchProductosByName()" class="btn btn-success">Buscar</button>
+            </div>
+            <div class="row show-hide-message" ng-show="scc.searchProductMessage">
+                <div>
+                    <div class="alert alert-warning">
+                        {{ scc.searchProductMessage }}
+                    </div>
+                </div>
+            </div>
+            <div ng-show="scc.productosAux.length > 0">
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="product in scc.productosAux">
+                            <th scope="row">{{pec.productosAux.indexOf(product)}}</th>
+                            <td>{{product.nombre}}</td>
+                            <td>{{product.precioVenta}}</td>
+                            <td>{{product.stock}}</td>
+                            <td><button ng-click="scc.selectProductForSell(product)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <div class="row show-hide-message" ng-show="scc.message">
     <div class="col-md-7 col-md-offset-2">

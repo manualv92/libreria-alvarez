@@ -25,7 +25,7 @@ public class ProductService {
     }
 
     public List<Producto> getProductoByNameAndHabilitado(String productName, int productHabilitado){
-        List<Producto> resultado = repository.findByNombreAndHabilitado(productName, productHabilitado);
+        List<Producto> resultado = repository.findByNombreContainingIgnoreCaseAndHabilitado(productName, productHabilitado);
         return resultado;
     }
 

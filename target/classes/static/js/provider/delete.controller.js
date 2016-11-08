@@ -29,8 +29,9 @@ angular.module('providerModule')
 		}
 
         vm.updateProvider = function() {
-            vm.providerData.habilitado = 0;
-            console.log(vm.providerData);
+            if(vm.providerSelected){
+                vm.providerData.habilitado = 0;
+                console.log(vm.providerData);
                 providerService.update(vm.providerData)
                     .then(function(res) {
                         if(res.data.success){
@@ -39,6 +40,7 @@ angular.module('providerModule')
                             vm.message = "Hubo un error en el borrado del proveedor, intente nuevamente!"
                         }
                     });
+            }
         };
 
 		vm.goBack = function() {
