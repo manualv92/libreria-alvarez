@@ -106,14 +106,6 @@ angular.module('sellModule')
             vm.productosAux.push(product);
         };
 
-        //DEPRECADO
-        vm.addProduct = function(productAux){
-            vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
-            productAux.cantidad = 1;
-            vm.sellData.productos.push(productAux);
-            vm.calcularTotal();
-        };
-
         vm.selectProductForSell = function(productAux){
             var encontro = false;
             angular.forEach(vm.sellData.productos, function(producto, key){
@@ -123,7 +115,6 @@ angular.module('sellModule')
                 }
             })
             if(!encontro){
-                //vm.productosAux.splice(vm.productosAux.indexOf(productAux),1);
                 productAux.cantidad = 1;
                 vm.sellData.productos.push(productAux);
             }
@@ -134,17 +125,6 @@ angular.module('sellModule')
             vm.message = "";
             vm.clientesAux.push(vm.sellData.cliente);
             vm.sellData.cliente = {};
-        };
-
-        //DEPRECADO
-        vm.addClient = function(clienteAux){
-            vm.message = "";
-            if(isEmpty(vm.sellData.cliente)){
-                vm.clientesAux.splice(vm.clientesAux.indexOf(clienteAux),1);
-                vm.sellData.cliente = clienteAux;
-            }else{
-                vm.message = "Solo se puede ingresar 1 cliente por compra";
-            }
         };
 
         vm.selectClientForSell = function(clienteAux){

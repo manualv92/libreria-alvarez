@@ -43,13 +43,11 @@ public class JasperController {
     )
     public ResponseEntity createJasper(Venta venta) {
         try {
-            //NOTA MENTAL, Agregar parametro al metodo una vez finalizado el testing. Para poder llamarlo despeus desde VentaController.
             // Compile jrxml file.
             JasperReport jasperReport = JasperCompileManager
                     .compileReport("E:/jasperinput/report1.jrxml");
             JasperReport jasperReport2 = JasperCompileManager
                     .compileReport("E:/jasperinput/report2.jrxml");
-            //Venta venta = ventaService.getById(5);
 
             System.out.println(venta.getFecha());
 
@@ -66,30 +64,7 @@ public class JasperController {
             parameters.put("DomicilioCliente", String.valueOf(venta.getCliente().getDomicilio()));
             parameters.put("CuitCliente", String.valueOf(venta.getCliente().getNroCuit()));
 
-            // DataSource
-            // This is simple example, no database.
-            // then using empty datasource.
-//            JRDataSource dataSource = new JREmptyDataSource();
 
-            //otro tutorial hace esto
-            /*
-            String[] columnNames = {"Id", "Name", "Department", "Email"};
-            String[][] data = {
-                    {"111", "G Conger", " Orthopaedic", "jim@wheremail.com"},
-                    {"222", "A Date", "ENT", "adate@somemail.com"},
-                    {"333", "R Linz", "Paedriatics", "rlinz@heremail.com"},
-                    {"444", "V Sethi", "Nephrology", "vsethi@whomail.com"},
-                    {"555", "K Rao", "Orthopaedics", "krao@whatmail.com"},
-                    {"666", "V Santana", "Nephrology", "vsan@whenmail.com"},
-                    {"777", "J Pollock", "Nephrology", "jpol@domail.com"},
-                    {"888", "H David", "Nephrology", "hdavid@donemail.com"},
-                    {"999", "P Patel", "Nephrology", "ppatel@gomail.com"},
-                    {"101", "C Comer", "Nephrology", "ccomer@whymail.com"}
-            };
-            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-            JRTableModelDataSource tableModelData = new JRTableModelDataSource(tableModel);
-
-            */
             ArrayList<DetalleVenta> detalleVentasArray = new ArrayList<DetalleVenta>();
             Set<DetalleVenta> detalleVentas = venta.getDetalleVentas();
 
@@ -102,8 +77,6 @@ public class JasperController {
             JRBeanCollectionDataSource beanColDataSource2 =
                     new JRBeanCollectionDataSource(detalleVentasArray);
 
-
-            ////
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
                     parameters, beanColDataSource);
             JasperPrint jasperPrint2 = JasperFillManager.fillReport(jasperReport2,

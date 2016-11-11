@@ -25,7 +25,6 @@ angular.module('providerModule')
                         vm.message = res.data.message;
                         vm.providerData = {};
                         vm.providerData.habilitado = 1;
-                        //getProductos();
                     });
             }else{
                 vm.message = "Debe ingresar un CUIT válido";
