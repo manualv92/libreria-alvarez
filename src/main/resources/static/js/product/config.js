@@ -38,5 +38,14 @@ angular.module('productModule').config(config);
                         controller: 'ProductDeleteController as pdc'
                     }
                 }
+            })
+            .state('root.product.consult',{
+                url: '/consult',
+                views: {
+                    '': {
+                        templateUrl: 'views/product/consult.html',
+                        controller: 'ProductConsultController as pcc'
+                    }
+                }
             });
     }

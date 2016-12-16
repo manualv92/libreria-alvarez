@@ -20,6 +20,7 @@
                         <li><a ui-sref="root.client.create">Crear Cliente</a></li>
                         <li><a ui-sref="root.client.edit">Editar Cliente</a></li>
                         <li><a ui-sref="root.client.delete">Borrar Cliente</a></li>
+                        <li><a ui-sref="root.client.consult">Consultar Cliente</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -28,6 +29,7 @@
                         <li><a ui-sref="root.product.create">Crear Producto</a></li>
                         <li><a ui-sref="root.product.edit">Editar Producto</a></li>
                         <li><a ui-sref="root.product.delete">Borrar Producto</a></li>
+                        <li><a ui-sref="root.product.consult">Consultar Producto</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -36,6 +38,7 @@
                         <li><a ui-sref="root.provider.create">Crear Proveedor</a></li>
                         <li><a ui-sref="root.provider.edit">Editar Proveedor</a></li>
                         <li><a ui-sref="root.provider.delete">Borrar Proveedor</a></li>
+                        <li><a ui-sref="root.provider.consult">Consultar Proveedor</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -46,11 +49,20 @@
                         <li><a ui-sref="root.user.delete">Borrar Usuario</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a ui-sref="root.sell.create">Venta</a>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ventas <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.sell.create">Crear Venta</a></li>
+                        <li><a ui-sref="root.sell.consult">Buscar Venta</a></li>
+                    </ul>
+
                 </li>
-                <li>
-                    <a ui-sref="root.buy.create">Compra</a>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compras <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="root.buy.create">Crear Compra</a></li>
+                        <li><a ui-sref="root.buy.consult">Buscar Compra</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes <span class="caret"></span></a>
@@ -58,10 +70,14 @@
                         <li><a ui-sref="root.report.create">Crear Reporte</a></li>
                     </ul>
                 </li>
-                <li>
+                <!--li>
                     <label>Usuario: {{nc.user.nombre}}</label>
                     <button class="btn" ng-click="nc.logOut()">Cerrar Sesión</button>
-                </li>
+                </li-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <label><span class="glyphicon glyphicon-user"></span> {{nc.user.nombre}}</label>
+                <button class="btn" ng-click="nc.logOut()">Cerrar Sesión</button>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

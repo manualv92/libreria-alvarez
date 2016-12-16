@@ -53,7 +53,7 @@ angular.module('providerModule')
                 if(vm.cuitValido){
                     providerService.update(vm.providerData)
                         .then(function(res) {
-                            vm.message = res.data.message;
+                            vm.message = "Se editó el proveedor con éxito!";
                         });
                 }else{
                     vm.message = "Debe ingresar un CUIT válido";

@@ -1,5 +1,7 @@
 package com.manuel.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,6 +25,7 @@ public class Compra {
     private String fecha;
 
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<DetalleCompra> detalleCompras;
 
 

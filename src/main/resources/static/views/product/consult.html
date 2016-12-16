@@ -1,0 +1,83 @@
+<div>
+    <h3>Consultar Producto</h3>
+</div>
+<form class="form-horizontal" ng-submit="pcc.deleteProduct()">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre del producto</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="pcc.productName" ng-required="!pcc.productName">
+        </div>
+        <button type="button" ng-click="pcc.searchProductosByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="pcc.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ pcc.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pcc.searchedProducts.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="product in pcc.searchedProducts">
+                    <th scope="row">{{pcc.searchedProducts.indexOf(product)}}</th>
+                    <td>{{product.nombre}}</td>
+                    <td>{{product.precio}}</td>
+                    <td>{{product.stock}}</td>
+                    <td><button ng-click="pcc.selectProductForDelete(product)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pcc.productSelected">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input readOnly type="text" class="form-control" ng-model="pcc.productData.nombre" ng-required="!pcc.productData.nombre">
+        </div>
+        <label class="col-md-1">Precio</label>
+        <div class="col-md-3">
+            <input readOnly type="number" step="any" class="form-control"  ng-model="pcc.productData.precio" ng-required="!pcc.productData.precio">
+        </div>
+    </div>
+    <div class="form-group" ng-show="pcc.productSelected">
+        <label class="col-md-2 control-label">Stock</label>
+        <div class="col-md-3">
+            <input readOnly type="text" class="form-control" ng-model="pcc.productData.stock" ng-required="!pcc.productData.stock">
+        </div>
+        <label class="col-md-1">Tipo Producto</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pcc.productData.tipoProducto.descripcion" ng-required="!pcc.productData.tipoProducto.descripcion">
+            </input>
+        </div>
+    </div>
+    <div class="form-group" ng-show="pcc.productSelected">
+        <label class="col-md-2 control-label">Marca</label>
+        <div class="col-md-3">
+            <input readOnly type="text" class="form-control" ng-model="pcc.productData.marca" ng-required="!pcc.productData.marca">
+        </div>
+        <label class="col-md-1">Precio Venta</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="pcc.productData.precioVenta" ng-required="!pcc.productData.precioVenta">
+            </input>
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="pcc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ pcc.message }}
+        </div>
+    </div>
+</div>

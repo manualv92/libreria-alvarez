@@ -38,5 +38,14 @@ angular.module('providerModule').config(config);
                         controller: 'ProviderDeleteController as pdc'
                     }
                 }
+            })
+            .state('root.provider.consult',{
+                url: '/consult',
+                views: {
+                    '': {
+                        templateUrl: 'views/provider/consult.html',
+                        controller: 'ProviderConsultController as pcc'
+                    }
+                }
             });
     }

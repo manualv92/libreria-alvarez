@@ -64,7 +64,7 @@
     <div class="form-group" ng-show="pdc.productSelected">
         <label class="col-md-2 control-label">Marca</label>
         <div class="col-md-3">
-            <input type="text" class="form-control" ng-model="pdc.productData.marca" ng-required="!pdc.productData.marca">
+            <input readOnly type="text" class="form-control" ng-model="pdc.productData.marca" ng-required="!pdc.productData.marca">
         </div>
         <label class="col-md-1">Precio Venta</label>
         <div class="col-md-3">
@@ -73,9 +73,9 @@
         </div>
     </div>
     <div class="form-group" ng-show="pdc.productSelected">
-        <div class="col-md-offset-2 col-md-7">
-            <button type="submit" class="btn btn-warning btn-block">Borrar Producto</button>
-            <a ng-click="pdc.goBack()" class="btn btn-danger btn-block">Cancelar</a>
+        <div class="col-md-offset-5 col-md-7">
+            <button type="submit" class="btn btn-warning">Borrar Producto</button>
+            <a ng-click="pdc.goBack()" class="btn btn-danger">Cancelar</a>
         </div>
     </div>
 </form>

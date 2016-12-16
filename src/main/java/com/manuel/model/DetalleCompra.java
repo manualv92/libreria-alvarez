@@ -1,5 +1,7 @@
 package com.manuel.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ public class DetalleCompra implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name ="compra_id")
+    @JsonBackReference
     private Compra compra;
 
 

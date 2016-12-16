@@ -92,4 +92,22 @@ public class CompraController {
 
         return new ResponseEntity<>("{\"success\": \"true\"}", headers, HttpStatus.OK);
     }
+    @RequestMapping(value="/search", method = RequestMethod.GET)
+    public ResponseEntity<String> searchBuys(@RequestParam(value="buyDate") String buyDate){
+        try {
+            System.out.println(buyDate);
+            List<Compra> compraList = service.getCompraByFecha(buyDate);
+            for (Compra comp :
+                    compraList) {
+                System.out.println(comp.getId());
+                System.out.println(comp.getDetalleCompras());
+                System.out.println(comp.getFecha());
+            }
+            String jsonClientes = JsonParser.compraListToJson(compraList);
+            return new ResponseEntity<>(jsonClientes, headers, HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>("{\"success\": \"false\"}", headers, HttpStatus.OK);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.manuel.controller;
 
 import com.manuel.model.*;
 import com.manuel.service.*;
+import com.manuel.util.JsonParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,6 +16,7 @@ import javax.inject.Inject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -90,5 +92,24 @@ public class VentaController {
         }
 
         return new ResponseEntity<>("{\"success\": \"true\"}", headers, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/search", method = RequestMethod.GET)
+    public ResponseEntity<String> searchSells(@RequestParam(value="sellDate") String sellDate){
+        try {
+            System.out.println(sellDate);
+            List<Venta> ventaList = service.getCompraByFecha(sellDate);
+            for (Venta vent :
+                    ventaList) {
+                System.out.println(vent.getId());
+                System.out.println(vent.getDetalleVentas());
+                System.out.println(vent.getFecha());
+            }
+            String jsonClientes = JsonParser.ventaListToJson(ventaList);
+            return new ResponseEntity<>(jsonClientes, headers, HttpStatus.OK);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>("{\"success\": \"false\"}", headers, HttpStatus.OK);
+        }
     }
 }

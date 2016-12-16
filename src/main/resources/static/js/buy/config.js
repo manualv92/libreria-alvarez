@@ -20,5 +20,14 @@ angular.module('buyModule').config(config);
                         controller: 'BuyCreateController as bcc'
                     }
                 }
+            })
+            .state('root.buy.consult',{
+                url: '/consult',
+                views: {
+                    '': {
+                        templateUrl: 'views/buy/consult.html',
+                        controller: 'BuyConsultController as bcc'
+                    }
+                }
             });
     }

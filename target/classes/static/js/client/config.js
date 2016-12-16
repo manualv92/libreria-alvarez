@@ -38,5 +38,14 @@ angular.module('clientModule').config(config);
                         controller: 'ClientDeleteController as cdc'
                     }
                 }
+            })
+            .state('root.client.consult',{
+                url: '/consult',
+                views: {
+                    '': {
+                        templateUrl: 'views/client/consult.html',
+                        controller: 'ClientConsultController as ccc'
+                    }
+                }
             });
     }

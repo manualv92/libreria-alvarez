@@ -24,4 +24,9 @@ public class CompraService {
         List<Compra> resultado = repository.findAll();
         return resultado;
     }
+
+    public List<Compra> getCompraByFecha(String fecha) {
+        List<Compra> resultado = repository.findByFechaContainingIgnoreCase(fecha);
+        return resultado;
+    }
 }

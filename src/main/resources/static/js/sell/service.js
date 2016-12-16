@@ -10,7 +10,8 @@ angular.module('sellModule')
 			get: get,
 			create: create,
 			update: update,
-			del: del
+			del: del,
+            getSellsByDate: getSellsByDate
 		};
 
 
@@ -26,4 +27,7 @@ angular.module('sellModule')
 		function del(id) {
 			return $http.delete(url + '/api/sell/delete/' + id);
 		}
+		function getSellsByDate(sellDate) {
+            return $http.get(url + '/api/sell/search?sellDate=' + sellDate);
+        }
 	}

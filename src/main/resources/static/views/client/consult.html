@@ -1,0 +1,95 @@
+<div>
+    <h3>Consultar un cliente</h3>
+</div>
+<form class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Ingrese mombre de Cliente</label>
+        <div class="col-md-3">
+            <input type="text" class="form-control" ng-model="ccc.clientName" ng-required="!ccc.clientName">
+        </div>
+        <button type="button" ng-click="ccc.searchClientesByName()" class="btn btn-success">Buscar</button>
+    </div>
+    <div class="row show-hide-message" ng-show="ccc.searchMessage">
+        <div class="col-md-7 col-md-offset-2">
+            <div class="alert alert-warning">
+                {{ ccc.searchMessage }}
+            </div>
+        </div>
+    </div>
+    <div class="form-group"  ng-show="ccc.searchedClients.length > 0">
+        <div class="col-md-7 col-md-offset-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="client in ccc.searchedClients">
+                    <th scope="row">{{ccc.searchedClients.indexOf(client)}}</th>
+                    <td>{{client.nombre}}</td>
+                    <td>{{client.apellido}}</td>
+                    <td>{{client.email}}</td>
+                    <td><button ng-click="ccc.selectClientForDelete(client)" type="button" class="btn btn-warning">Seleccionar</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<form class="form-horizontal" ng-submit="ccc.deleteClient()" ng-show="ccc.clientSelected">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-3">
+            <input type="text" readOnly class="form-control" ng-model="ccc.clientData.nombre" ng-required="!ccc.clientData.nombre">
+        </div>
+        <label class="col-md-1">Apellido</label>
+        <div class="col-md-3">
+            <input type="text" readOnly class="form-control" ng-model="ccc.clientData.apellido" ng-required="!ccc.clientData.apellido">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Domicilio</label>
+        <div class="col-md-3">
+            <input type="text" readOnly class="form-control" ng-model="ccc.clientData.domicilio" ng-required="!ccc.clientData.domicilio">
+        </div>
+        <label class="col-md-1">Email</label>
+        <div class="col-md-3">
+            <input type="email" readOnly class="form-control" ng-model="ccc.clientData.email" ng-required="!ccc.clientData.email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Persona</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" ng-model="ccc.clientData.tipoPersona.descripcion" ng-required="!ccc.clientData.tipoPersona.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número de CUIT</label>
+        <div class="col-md-3">
+            <input type="number" min="0" readOnly class="form-control" ng-model="ccc.clientData.nroCuit" ng-required="!ccc.clientData.nroCuit">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Tipo de Documento</label>
+        <div class="col-md-3">
+            <input readOnly class="form-control" readOnly ng-model="ccc.clientData.tipoDocumento.descripcion" ng-required="!ccc.clientData.tipoDocumento.descripcion">
+            </input>
+        </div>
+        <label class="col-md-1">Número Documento</label>
+        <div class="col-md-3">
+            <input type="number" min="0" class="form-control" readOnly ng-model="ccc.clientData.nroDocumento" ng-required="!ccc.clientData.nroDocumento">
+        </div>
+    </div>
+</form>
+
+<div class="row show-hide-message" ng-show="ccc.message">
+    <div class="col-md-7 col-md-offset-2">
+        <div class="alert alert-info">
+            {{ ccc.message }}
+        </div>
+    </div>
+</div>

@@ -30,4 +30,10 @@ public class VentaService {
         Venta resultado = repository.findById(id);
         return resultado;
     }
+
+    public List<Venta> getCompraByFecha(String sellDate){
+        List<Venta> resultado = repository.findByFechaContainingIgnoreCase(sellDate);
+        return resultado;
+    }
+
 }

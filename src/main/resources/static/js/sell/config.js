@@ -20,5 +20,14 @@ angular.module('sellModule').config(config);
                         controller: 'SellCreateController as scc'
                     }
                 }
+            })
+            .state('root.sell.consult',{
+                url: '/consult',
+                views: {
+                    '': {
+                        templateUrl: 'views/sell/consult.html',
+                        controller: 'SellConsultController as scc'
+                    }
+                }
             });
     }

@@ -52,16 +52,7 @@ public class JsonParser {
         }
         return jsonString;
     }
-    /*public static User toObject(String json) {
-        User user = null;
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            user = mapper.readValue(json, User.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return user;
-    }*/
+
     public static String productoListToJson(List<Producto> productoList) {
         String jsonString = null;
         try {
@@ -142,4 +133,25 @@ public class JsonParser {
         }
         return jsonString;
     }
+
+    public static String compraListToJson(List<Compra> compras) {
+        String jsonString = null;
+        try {
+            jsonString = new ObjectMapper().writeValueAsString(compras);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
+    public static String ventaListToJson(List<Venta> ventas) {
+        String jsonString = null;
+        try {
+            jsonString = new ObjectMapper().writeValueAsString(ventas);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
 }

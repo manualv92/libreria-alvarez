@@ -11,7 +11,7 @@ angular.module('buyModule')
 			create: create,
 			update: update,
 			del: del,
-			getBuyByName: getBuyByName
+			getBuysByDate: getBuysByDate
 		};
 
 
@@ -27,7 +27,7 @@ angular.module('buyModule')
 		function del(id) {
 			return $http.delete(url + '/api/buy/delete/' + id);
 		}
-        function getBuyByName(buyName) {
-            return $http.get(url + '/api/buy/search?buyName=' + buyName + '&&buyHabilitado=1');
+        function getBuysByDate(buyDate) {
+            return $http.get(url + '/api/buy/search?buyDate=' + buyDate);
         }
 	}
